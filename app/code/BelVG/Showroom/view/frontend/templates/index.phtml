@@ -1,0 +1,47 @@
+<?php
+$showrooms = $block->getShowrooms();
+?>
+
+<form action="" method="post" class="form">
+    <fieldset class="fieldset">
+        <legend class="legend"><span>Please, fill the form</span></legend><br>
+        <div class="field name required">
+            <label class="label" for="name"><span>Showroom</span></label>
+            <div class="control">
+                <select name="showroom_id"><?php
+
+                    foreach ($showrooms as $room) {
+                        ?><option value="<?= $room['showroom_id']?>"><?= $room['name']?><?php
+                    }
+
+                    ?>
+                </select>
+            </div>
+        </div>
+        <div class="field name required">
+            <label class="label" for="name"><span>Name</span></label>
+            <div class="control">
+                <input name="name" id="name" title="Name" value="" class="input-text" type="text">
+            </div>
+        </div>
+        <div class="field email required">
+            <label class="label" for="email"><span>Email</span></label>
+            <div class="control">
+                <input name="email" id="email" title="Email" value="" class="input-text" type="email">
+            </div>
+        </div>
+        <div class="field telephone">
+            <label class="label" for="telephone"><span>Date</span></label>
+            <div class="control">
+                <input name="date" title="Date" value="" class="input-text" type="date">
+            </div>
+        </div>
+    </fieldset>
+    <div class="actions-toolbar">
+        <div class="primary">
+            <button type="submit" title="Submit" class="action submit primary">
+                <span>Submit</span>
+            </button>
+        </div>
+    </div>
+</form>

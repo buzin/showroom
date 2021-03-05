@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<schema xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:framework:Setup/Declaration/Schema/etc/schema.xsd">
+    <table name="belvg_showroom" engine="innodb" resource="default">
+        <column name="showroom_id" xsi:type="int" padding="11" unsigned="false" nullable="false" identity="true" comment="Showroom ID"/>
+        <column name="name" xsi:type="varchar" length="255" nullable="false" comment="Showroom Title"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="showroom_id"/>
+        </constraint>
+    </table>
+    <table name="belvg_showroom_entry" engine="innodb" resource="default">
+        <column name="entry_id" xsi:type="int" padding="11" unsigned="false" nullable="false" identity="true" comment="Entry ID"/>
+        <column name="showroom_id" xsi:type="int" padding="11" unsigned="false" nullable="false" identity="false" comment="Showroom ID"/>
+        <column name="date" xsi:type="datetime" nullable="false"/>
+        <column name="name" xsi:type="varchar" length="255" nullable="false"/>
+        <column name="email" xsi:type="varchar" length="255" nullable="false"/>
+        <constraint xsi:type="primary" referenceId="PRIMARY">
+            <column name="entry_id"/>
+        </constraint>
+        <constraint xsi:type="foreign" referenceId="BELVG_SHOWROOM_ENTRY_SHOWROOM_ID_BELVG_SHOWROOM_SHOWROOM_ID"
+                    column="showroom_id"
+                    referenceTable="belvg_showroom" referenceColumn="showroom_id" onDelete="CASCADE"/>
+    </table>
+</schema>

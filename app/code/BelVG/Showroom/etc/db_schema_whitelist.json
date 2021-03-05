@@ -1,0 +1,24 @@
+{
+    "belvg_showroom": {
+        "column": {
+            "showroom_id": true,
+            "name": true
+        },
+        "constraint": {
+            "PRIMARY": true
+        }
+    },
+    "belvg_showroom_entry": {
+        "column": {
+            "entry_id": true,
+            "showroom_id": true,
+            "date": true,
+            "name": true,
+            "email": true
+        },
+        "constraint": {
+            "PRIMARY": true,
+            "BELVG_SHOWROOM_ENTRY_SHOWROOM_ID_BELVG_SHOWROOM_SHOWROOM_ID": true
+        }
+    }
+}
