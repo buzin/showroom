@@ -11,7 +11,7 @@
     <table name="belvg_showroom_entry" engine="innodb" resource="default">
         <column name="entry_id" xsi:type="int" padding="11" unsigned="false" nullable="false" identity="true" comment="Entry ID"/>
         <column name="showroom_id" xsi:type="int" padding="11" unsigned="false" nullable="false" identity="false" comment="Showroom ID"/>
-        <column name="date" xsi:type="datetime" nullable="false"/>
+        <column name="date" xsi:type="datetime" nullable="true"/>
         <column name="name" xsi:type="varchar" length="255" nullable="false"/>
         <column name="email" xsi:type="varchar" length="255" nullable="false"/>
         <constraint xsi:type="primary" referenceId="PRIMARY">

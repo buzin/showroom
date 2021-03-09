@@ -1,8 +1,9 @@
 <?php
-$showrooms = $block->getShowrooms();
-?>
 
-<form action="" method="post" class="form">
+$showrooms = $block->getShowrooms();
+
+?>
+<form action="/showroom/create/create" method="post" class="form">
     <fieldset class="fieldset">
         <legend class="legend"><span>Please, fill the form</span></legend><br>
         <div class="field name required">
@@ -10,30 +11,32 @@ $showrooms = $block->getShowrooms();
             <div class="control">
                 <select name="showroom_id"><?php
 
+                    $showroomId = $block->getShowroom();
                     foreach ($showrooms as $room) {
-                        ?><option value="<?= $room['showroom_id']?>"><?= $room['name']?><?php
-                    }
+                    ?><option value="<?= $room['showroom_id']?>"<?= $room['showroom_id'] == $showroomId ? ' selected=""' : '' ?>>
+                        <?= $block->escapeHtml($room['name'])?><?php
+                        }
 
-                    ?>
+                        ?>
                 </select>
             </div>
         </div>
         <div class="field name required">
             <label class="label" for="name"><span>Name</span></label>
             <div class="control">
-                <input name="name" id="name" title="Name" value="" class="input-text" type="text">
+                <input name="name" id="name" title="Name" value="<?= $block->getName() ?>" class="input-text" type="text">
             </div>
         </div>
         <div class="field email required">
             <label class="label" for="email"><span>Email</span></label>
             <div class="control">
-                <input name="email" id="email" title="Email" value="" class="input-text" type="email">
+                <input name="email" id="email" title="Email" value="<?= $block->getEmail() ?>" class="input-text" type="email">
             </div>
         </div>
         <div class="field telephone">
             <label class="label" for="telephone"><span>Date</span></label>
             <div class="control">
-                <input name="date" title="Date" value="" class="input-text" type="date">
+                <input name="date" title="Date" value="<?= $block->getDate()?>" class="input-text" type="date">
             </div>
         </div>
     </fieldset>
