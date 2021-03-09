@@ -24,13 +24,29 @@ $showrooms = $block->getShowrooms();
         <div class="field name required">
             <label class="label" for="name"><span>Name</span></label>
             <div class="control">
-                <input name="name" id="name" title="Name" value="<?= $block->getName() ?>" class="input-text" type="text">
+                <?php
+
+                if ($block->isLogged()) {
+                    ?><?= $block->getCustomerName() ?><?php
+                } else {
+                    ?><input name="name" id="name" title="Name" value="<?= $block->getName() ?>" class="input-text" type="text"><?php
+                }
+
+                ?>
             </div>
         </div>
         <div class="field email required">
             <label class="label" for="email"><span>Email</span></label>
             <div class="control">
-                <input name="email" id="email" title="Email" value="<?= $block->getEmail() ?>" class="input-text" type="email">
+            <?php
+
+            if ($block->isLogged()) {
+                ?><?= $block->getCustomerEmail() ?><?php
+            } else {
+            ?><input name="email" id="email" title="Email" value="<?= $block->getEmail() ?>" class="input-text" type="email"><?php
+            }
+
+            ?>
             </div>
         </div>
         <div class="field telephone">

@@ -4,7 +4,7 @@ namespace BelVG\Showroom\Block;
 
 use BelVG\Showroom\Model\ShowroomFactory;
 use Magento\Customer\Model\Session;
-use Magento\Backend\Model\Auth\Session as AuthSession;
+use Magento\Customer\Model\SessionFactory;
 use Magento\Framework\App\Request\Http;
 use Magento\Framework\View\Element\Template;
 
@@ -12,22 +12,19 @@ class Index extends \Magento\Framework\View\Element\Template
 {
     private ShowroomFactory $showroomFactory;
     private Http $request;
-    private Session $customerSession;
-    private AuthSession $authSession;
+    private ?Session $customerSession = null;
+    private SessionFactory $customerSessionFactory;
 
     public function __construct(Template\Context $context,
                                 Http $request,
-                                Session $customerSession,
-                                AuthSession $authSession,
-                                ShowroomFactory $showroomFactory,
-                                array $data = []
+                                SessionFactory $customerSessionFactory,
+                                ShowroomFactory $showroomFactory
     )
     {
-        parent::__construct($context, $data);
+        parent::__construct($context);
         $this->showroomFactory = $showroomFactory;
         $this->request = $request;
-        $this->customerSession = $customerSession;
-        $this->authSession = $authSession;
+        $this->customerSessionFactory = $customerSessionFactory;
     }
 
     public function getShowroom()
@@ -37,23 +34,12 @@ class Index extends \Magento\Framework\View\Element\Template
 
     public function getName()
     {
-        $name = $this->request->getParam('name');
-        if (!$name) {
-            $name = $this->customerSession->getCustomer()->getName();
-        }
-        if (!$name) {
-            $name = $this->authSession->getUser()->getName();
-        }
-        return $name;
+        return $this->request->getParam('name');
     }
 
     public function getEmail()
     {
-        $email = $this->request->getParam('email');
-        if (!$email) {
-            $email = $this->customerSession->getCustomer()->getEmail();
-        }
-        return $email;
+        return $this->request->getParam('email');
     }
 
     public function getDate()
@@ -66,10 +52,39 @@ class Index extends \Magento\Framework\View\Element\Template
         $data = [];
         $showroom = $this->showroomFactory->create();
         $collection = $showroom->getCollection();
-        foreach($collection as $item) {
+        foreach ($collection as $item) {
             $data[] = $item->getData();
         }
         return $data;
+    }
+
+    public function isLogged()
+    {
+        $this->createSession();
+        return $this->customerSession->isLoggedIn();
+    }
+
+    public function getCustomerName()
+    {
+        $this->createSession();
+        return $this->customerSession->getCustomer()->getName();
+    }
+
+    public function getCustomerEmail()
+    {
+        $this->createSession();
+        return $this->customerSession->getCustomer()->getEmail();
+    }
+
+    /**
+     * Fetching the logged status from Session model will not work in case you want to use it after enabling Magento
+     * default FPC cache, in that case, you should use SessionFactory instead.
+     */
+    protected function createSession()
+    {
+        if (!$this->customerSession) {
+            $this->customerSession = $this->customerSessionFactory->create();
+        }
     }
 
 }

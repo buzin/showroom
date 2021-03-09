@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="BelVG_Showroom::showroom" title="Showroom" module="BelVG_Showroom" parent="Magento_Backend::content" sortOrder="50" dependsOnModule="BelVG_Showroom" resource="BelVG_Showroom::menu"/>
+        <add id="BelVG_Showroom::showroom_entries" title="Entries" module="BelVG_Showroom" parent="BelVG_Showroom::showroom" sortOrder="10" dependsOnModule="BelVG_Showroom" action="showroom/list" resource="BelVG_Showroom::menu"/>
+    </menu>
+</config>

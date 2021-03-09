@@ -2,7 +2,7 @@
 
 namespace BelVG\Showroom\Model;
 
-use BelVG\Showroom\Model\ResourceModel\Showroom as ShowroomEntryResourceModel;
+use BelVG\Showroom\Model\ResourceModel\ShowroomEntry as ShowroomEntryResourceModel;
 use Magento\Framework\DataObject\IdentityInterface;
 use Magento\Framework\Model\AbstractModel;
 
