@@ -5,8 +5,6 @@ namespace BelVG\Showroom\Controller\Adminhtml\Show;
 use Magento\Backend\App\Action;
 use Magento\Backend\App\Action\Context;
 use Magento\Framework\App\Action\HttpGetActionInterface;
-use Magento\Framework\App\ResponseInterface;
-use Magento\Framework\View\Result\Page;
 use Magento\Framework\View\Result\PageFactory;
 
 class Show extends Action implements HttpGetActionInterface

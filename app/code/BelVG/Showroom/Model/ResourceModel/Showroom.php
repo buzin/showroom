@@ -1,8 +1,6 @@
 <?php
 
-
 namespace BelVG\Showroom\Model\ResourceModel;
-
 
 use Magento\Framework\Model\ResourceModel\Db\AbstractDb;
 

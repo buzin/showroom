@@ -27,22 +27,22 @@ class Index extends \Magento\Framework\View\Element\Template
         $this->customerSessionFactory = $customerSessionFactory;
     }
 
-    public function getShowroom()
+    public function getShowroom(): int
     {
         return $this->request->getParam('showroom_id');
     }
 
-    public function getName()
+    public function getName(): ?string
     {
         return $this->request->getParam('name');
     }
 
-    public function getEmail()
+    public function getEmail(): ?string
     {
         return $this->request->getParam('email');
     }
 
-    public function getDate()
+    public function getDate(): ?string
     {
         return $this->request->getParam('date');
     }
@@ -58,19 +58,19 @@ class Index extends \Magento\Framework\View\Element\Template
         return $data;
     }
 
-    public function isLogged()
+    public function isLogged(): bool
     {
         $this->createSession();
         return $this->customerSession->isLoggedIn();
     }
 
-    public function getCustomerName()
+    public function getCustomerName(): string
     {
         $this->createSession();
         return $this->customerSession->getCustomer()->getName();
     }
 
-    public function getCustomerEmail()
+    public function getCustomerEmail(): string
     {
         $this->createSession();
         return $this->customerSession->getCustomer()->getEmail();
@@ -80,7 +80,7 @@ class Index extends \Magento\Framework\View\Element\Template
      * Fetching the logged status from Session model will not work in case you want to use it after enabling Magento
      * default FPC cache, in that case, you should use SessionFactory instead.
      */
-    protected function createSession()
+    protected function createSession(): void
     {
         if (!$this->customerSession) {
             $this->customerSession = $this->customerSessionFactory->create();

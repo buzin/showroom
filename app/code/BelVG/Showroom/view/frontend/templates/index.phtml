@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * @var $block \BelVG\Showroom\Block\Index
+ * @var $escaper \Magento\Framework\Escaper
+ */
+
 $showrooms = $block->getShowrooms();
 
 ?>
@@ -7,17 +12,18 @@ $showrooms = $block->getShowrooms();
     <fieldset class="fieldset">
         <legend class="legend"><span>Please, fill the form</span></legend><br>
         <div class="field name required">
-            <label class="label" for="name"><span>Showroom</span></label>
+            <label class="label" for="showroom"><span>Showroom</span></label>
             <div class="control">
-                <select name="showroom_id"><?php
+                <select name="showroom_id" id="showroom">
+                    <?php
 
                     $showroomId = $block->getShowroom();
                     foreach ($showrooms as $room) {
-                    ?><option value="<?= $room['showroom_id']?>"<?= $room['showroom_id'] == $showroomId ? ' selected=""' : '' ?>>
-                        <?= $block->escapeHtml($room['name'])?><?php
-                        }
+                        ?><option value="<?= (int)$room['showroom_id']?>"<?= $room['showroom_id'] == $showroomId ? ' selected=""' : '' ?>>
+                        <?= $escaper->escapeHtml($room['name'])?><?php
+                    }
 
-                        ?>
+                    ?>
                 </select>
             </div>
         </div>
@@ -27,9 +33,9 @@ $showrooms = $block->getShowrooms();
                 <?php
 
                 if ($block->isLogged()) {
-                    ?><?= $block->getCustomerName() ?><?php
+                    ?><?= $escaper->escapeHtml($block->getCustomerName()) ?><?php
                 } else {
-                    ?><input name="name" id="name" title="Name" value="<?= $block->getName() ?>" class="input-text" type="text"><?php
+                    ?><input name="name" id="name" title="Name" value="<?= $escaper->escapeHtmlAttr($block->getName()) ?>" class="input-text" type="text"><?php
                 }
 
                 ?>
@@ -41,9 +47,9 @@ $showrooms = $block->getShowrooms();
             <?php
 
             if ($block->isLogged()) {
-                ?><?= $block->getCustomerEmail() ?><?php
+                ?><?= $escaper->escapeHtml($block->getCustomerEmail()) ?><?php
             } else {
-            ?><input name="email" id="email" title="Email" value="<?= $block->getEmail() ?>" class="input-text" type="email"><?php
+            ?><input name="email" id="email" title="Email" value="<?= $escaper->escapeHtmlAttr($block->getEmail()) ?>" class="input-text" type="email"><?php
             }
 
             ?>
@@ -52,7 +58,7 @@ $showrooms = $block->getShowrooms();
         <div class="field telephone">
             <label class="label" for="telephone"><span>Date</span></label>
             <div class="control">
-                <input name="date" title="Date" value="<?= $block->getDate()?>" class="input-text" type="date">
+                <input name="date" title="Date" value="<?= $escaper->escapeHtmlAttr($block->getDate())?>" class="input-text" type="date">
             </div>
         </div>
     </fieldset>

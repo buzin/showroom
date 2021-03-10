@@ -9,9 +9,7 @@ use Magento\Framework\Model\AbstractModel;
 class Showroom extends AbstractModel implements IdentityInterface
 {
     const CACHE_TAG = 'belvg_showroom';
-
     protected $_cacheTag = 'belvg_showroom';
-
     protected $_eventPrefix = 'belvg_showroom';
 
     protected function _construct()
@@ -19,15 +17,13 @@ class Showroom extends AbstractModel implements IdentityInterface
         $this->_init(ShowroomResourceModel::class);
     }
 
-    public function getIdentities()
+    public function getIdentities(): array
     {
         return [self::CACHE_TAG . '_' . $this->getId()];
     }
 
-    public function getDefaultValues()
+    public function getDefaultValues(): array
     {
-        $values = [];
-
-        return $values;
+        return [];
     }
 }
