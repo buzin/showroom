@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="belvg_showroom_entry_listing_data_source" xsi:type="string">BelVGShowroomEntryCollection</item>
+            </argument>
+        </arguments>
+    </type>
+    <virtualType name="BelVGShowroomEntryCollection" type="BelVG\Showroom\Ui\DataProvider\Entry\Listing\Collection">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">belvg_showroom_entry</argument>
+            <argument name="resourceModel" xsi:type="string">BelVG\Showroom\Model\ResourceModel\ShowroomEntry</argument>
+        </arguments>
+    </virtualType>
+</config>

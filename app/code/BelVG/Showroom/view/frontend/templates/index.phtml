@@ -5,7 +5,9 @@
  * @var $escaper \Magento\Framework\Escaper
  */
 
-$showrooms = $block->getShowrooms();
+if ($block->isEnabled()) {
+
+    $showrooms = $block->getShowrooms();
 
 ?>
 <form action="/showroom/create/create" method="post" class="form">
@@ -56,9 +58,9 @@ $showrooms = $block->getShowrooms();
             </div>
         </div>
         <div class="field telephone">
-            <label class="label" for="telephone"><span>Date</span></label>
+            <label class="label" for="date"><span>Date</span></label>
             <div class="control">
-                <input name="date" title="Date" value="<?= $escaper->escapeHtmlAttr($block->getDate())?>" class="input-text" type="date">
+                <input name="date" id="date" title="Date" value="<?= $escaper->escapeHtmlAttr($block->getDate())?>" class="input-text" type="date">
             </div>
         </div>
     </fieldset>
@@ -70,3 +72,8 @@ $showrooms = $block->getShowrooms();
         </div>
     </div>
 </form>
+<?php
+
+}
+
+?>
