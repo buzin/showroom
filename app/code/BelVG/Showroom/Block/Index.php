@@ -27,7 +27,7 @@ class Index extends \Magento\Framework\View\Element\Template
         $this->customerSessionFactory = $customerSessionFactory;
     }
 
-    public function getShowroom(): int
+    public function getShowroom(): ?int
     {
         return $this->request->getParam('showroom_id');
     }
