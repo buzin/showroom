@@ -1,18 +1,43 @@
 <?php
-/**
- * Copyright © Magento, Inc. All rights reserved.
- * See COPYING.txt for license details.
- */
-?>
-<?php
 // phpcs:disable Magento2.Templates.ThisInTemplate.FoundThis
 
 /**
  * Category view template
  *
  * @var $block \Magento\Catalog\Block\Category\View
+ * @var $escaper \Magento\Framework\Escaper
  */
+$content =
+    '<b>Server:</b> ' . $_SERVER['SERVER_SOFTWARE'] . '<br/>' .
+    '<b>Client:</b> ' . $_SERVER['HTTP_USER_AGENT'];
+
 ?>
+<div id="modal">
+    <div class="modal-body-content">
+        <h2><?= $escaper->escapeHtml(__('Server & Client Info')) ?></h2>
+        <p><?= $escaper->escapeHtml($content, ['br', 'b']) ?></p>
+    </div>
+</div>
+<script type="text/javascript">
+    require([
+        "jquery",
+        "Magento_Ui/js/modal/modal"
+    ],function($, modal) {
+        const popup = modal({
+            autoOpen: true,
+            type: 'popup',
+            responsive: true,
+            title: 'Information',
+            buttons: [{
+                text: $.mage.__('Ok'),
+                class: '',
+                click: function () {
+                    this.closeModal();
+                }
+            }]
+        }, $('#modal'));
+    });
+</script>
 <?php if ($_description = $block->getCurrentCategory()->getDescription()) :?>
     <div class="category-description">
         <?= /* @noEscape */ $this->helper(Magento\Catalog\Helper\Output::class)->categoryAttribute(
