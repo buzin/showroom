@@ -18,6 +18,13 @@ class NewEntryNotifier implements ObserverInterface
     private ScopeConfigInterface $scopeConfig;
     private StoreManagerInterface $storeManager;
 
+    /**
+     * NewEntryNotifier constructor.
+     * @param TransportBuilder $transportBuilder
+     * @param StateInterface $inlineTranslation
+     * @param ScopeConfigInterface $scopeConfig
+     * @param StoreManagerInterface $storeManager
+     */
     public function __construct(
         TransportBuilder $transportBuilder,
         StateInterface $inlineTranslation,

@@ -22,6 +22,16 @@ class Create implements HttpPostActionInterface
     private ModelFactory $modelFactory;
     private ResourceModelFactory $resourceModelFactory;
 
+    /**
+     * Create constructor.
+     * @param RequestInterface $request
+     * @param SessionFactory $customerSessionFactory
+     * @param RedirectFactory $redirectFactory
+     * @param MessageManager $messageManager
+     * @param EventManager $eventManager
+     * @param ModelFactory $modelFactory
+     * @param ResourceModelFactory $resourceModelFactory
+     */
     public function __construct(
         RequestInterface $request,
         SessionFactory $customerSessionFactory,

@@ -17,11 +17,20 @@ class Index extends Template
     private SessionFactory $customerSessionFactory;
     private ScopeConfigInterface $scopeConfig;
 
-    public function __construct(Template\Context $context,
-                                Http $request,
-                                ScopeConfigInterface $scopeConfig,
-                                SessionFactory $customerSessionFactory,
-                                ShowroomFactory $showroomFactory
+    /**
+     * Index constructor.
+     * @param Template\Context $context
+     * @param Http $request
+     * @param ScopeConfigInterface $scopeConfig
+     * @param SessionFactory $customerSessionFactory
+     * @param ShowroomFactory $showroomFactory
+     */
+    public function __construct(
+        Template\Context $context,
+        Http $request,
+        ScopeConfigInterface $scopeConfig,
+        SessionFactory $customerSessionFactory,
+        ShowroomFactory $showroomFactory
     )
     {
         parent::__construct($context);

@@ -10,6 +10,10 @@ class Index implements HttpGetActionInterface
 {
     private PageFactory $pageFactory;
 
+    /**
+     * Index constructor.
+     * @param PageFactory $pageFactory
+     */
     public function __construct(PageFactory $pageFactory)
     {
         $this->pageFactory = $pageFactory;

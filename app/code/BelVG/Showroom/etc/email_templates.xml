@@ -1,4 +1,4 @@
-cd..<?xml version="1.0"?>
+<?xml version="1.0"?>
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Email:etc/email_templates.xsd">
     <template id="new_entry_email" label="New Entry Email" file="new_entry_email.html" type="html" module="BelVG_Showroom" area="frontend"/>
 </config>
