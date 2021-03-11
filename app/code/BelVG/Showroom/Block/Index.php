@@ -31,7 +31,7 @@ class Index extends Template
         $this->scopeConfig = $scopeConfig;
     }
 
-    public function isEnabled(): bool
+    public function isEnabled(): ?bool
     {
         $storeScope = \Magento\Store\Model\ScopeInterface::SCOPE_STORE;
         return $this->scopeConfig->getValue('admin/showroom/enabled', $storeScope);

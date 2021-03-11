@@ -9,32 +9,36 @@ use Magento\Framework\Controller\Result\RedirectFactory;
 use BelVG\Showroom\Model\ShowroomEntryFactory as ModelFactory;
 use BelVG\Showroom\Model\ResourceModel\ShowroomEntryFactory as ResourceModelFactory;
 use Magento\Framework\Exception\AlreadyExistsException;
-use Magento\Framework\Message\ManagerInterface;
+use Magento\Framework\Message\ManagerInterface as MessageManager;
+use Magento\Framework\Event\ManagerInterface as EventManager;
 
 class Create implements HttpPostActionInterface
 {
     private RequestInterface $request;
-    private ManagerInterface $messageManager;
+    private SessionFactory $customerSessionFactory;
+    private RedirectFactory $redirectFactory;
+    private MessageManager $messageManager;
+    private EventManager $eventManager;
     private ModelFactory $modelFactory;
     private ResourceModelFactory $resourceModelFactory;
-    private RedirectFactory $redirectFactory;
-    private SessionFactory $customerSessionFactory;
 
     public function __construct(
         RequestInterface $request,
         SessionFactory $customerSessionFactory,
-        ManagerInterface $messageManager,
         RedirectFactory $redirectFactory,
+        MessageManager $messageManager,
+        EventManager $eventManager,
         ModelFactory $modelFactory,
         ResourceModelFactory $resourceModelFactory
 
     ) {
         $this->request = $request;
+        $this->customerSessionFactory = $customerSessionFactory;
+        $this->redirectFactory = $redirectFactory;
         $this->messageManager = $messageManager;
+        $this->eventManager = $eventManager;
         $this->modelFactory = $modelFactory;
         $this->resourceModelFactory = $resourceModelFactory;
-        $this->redirectFactory = $redirectFactory;
-        $this->customerSessionFactory = $customerSessionFactory;
     }
 
     /**
@@ -55,7 +59,9 @@ class Create implements HttpPostActionInterface
         }
         $email = filter_var($email, FILTER_VALIDATE_EMAIL);
 
-        // Array to set model data or to pass values back to the form in the case of failure.
+        // Array to save model data and
+        // to dispatch new entry event and
+        // to pass values back to the form in the case of failure.
         $params = ['showroom_id' => $showroomId, 'name' => $name, 'email' => $email, 'date' => $date];
 
         if ($showroomId && $name && $email) {
@@ -64,8 +70,9 @@ class Create implements HttpPostActionInterface
             $model->setData($params);
             try {
                 $resourceModel->save($model);
-                $params = [];   // do not need to pass parameters back to the form
+                $this->eventManager->dispatch('belvg_showroom_new_entry', $params);
                 $this->messageManager->addSuccess(__('Showroom entry created'));
+                $params = [];   // do not need to pass parameters back to the form
             } catch(AlreadyExistsException $e) {
                 $this->messageManager->addError(__('Entry already exists'));
             }
