@@ -16,27 +16,26 @@ class NewEntryNotifier implements ObserverInterface
     private TransportBuilder $transportBuilder;
     private StateInterface $inlineTranslation;
     private ScopeConfigInterface $scopeConfig;
-    private StoreManagerInterface $storeManager;
 
     /**
      * NewEntryNotifier constructor.
      * @param TransportBuilder $transportBuilder
      * @param StateInterface $inlineTranslation
      * @param ScopeConfigInterface $scopeConfig
-     * @param StoreManagerInterface $storeManager
      */
     public function __construct(
         TransportBuilder $transportBuilder,
         StateInterface $inlineTranslation,
-        ScopeConfigInterface $scopeConfig,
-        StoreManagerInterface $storeManager)
+        ScopeConfigInterface $scopeConfig)
     {
         $this->transportBuilder = $transportBuilder;
         $this->inlineTranslation = $inlineTranslation;
         $this->scopeConfig = $scopeConfig;
-        $this->storeManager = $storeManager;
     }
 
+    /**
+     * @param Observer $observer
+     */
     public function execute(Observer $observer)
     {
         if ($showroomId = $observer->getData('showroom_id')) {

@@ -81,16 +81,16 @@ class Create implements HttpPostActionInterface
             try {
                 $resourceModel->save($model);
                 $this->eventManager->dispatch('belvg_showroom_new_entry', $params);
-                $this->messageManager->addSuccess(__('Showroom entry created'));
+                $this->messageManager->addSuccessMessage(__('Showroom entry created'));
                 $params = [];   // do not need to pass parameters back to the form
             } catch(AlreadyExistsException $e) {
-                $this->messageManager->addError(__('Entry already exists'));
+                $this->messageManager->addErrorMessage(__('Entry already exists'));
             }
             catch (\Exception $e) {
-                $this->messageManager->addError(__('Cannot create entry'));
+                $this->messageManager->addErrorMessage(__('Cannot create entry'));
             }
         } else {
-            $this->messageManager->addError(__('Fill required fields'));
+            $this->messageManager->addErrorMessage(__('Fill required fields'));
         }
 
         $redirect = $this->redirectFactory->create();

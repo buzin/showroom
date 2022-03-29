@@ -17,11 +17,17 @@ class ShowroomEntry extends AbstractModel implements IdentityInterface
         $this->_init(ShowroomEntryResourceModel::class);
     }
 
+    /**
+     * @return string[]
+     */
     public function getIdentities(): array
     {
         return [self::CACHE_TAG . '_' . $this->getId()];
     }
 
+    /**
+     * @return array
+     */
     public function getDefaultValues(): array
     {
         return [];
